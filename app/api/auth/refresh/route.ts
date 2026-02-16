@@ -44,6 +44,7 @@ export async function POST(req: NextRequest) {
     //   return NextResponse.json({message: " Refresh token revoked"}, {status: 401})
     // }
 
+    // Rotacion
     const newAccessToken = jwt.sign({
       sub: user.id,
       name: user.name,

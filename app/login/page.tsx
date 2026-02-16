@@ -13,7 +13,13 @@ export default function Login() {
     e.preventDefault()
     const res = await axios.post("/api/auth/login", credentials)
     const data = await res.data
-    console.log("Esto devolvio la api: ", data)
+    console.log(data)
+  }
+
+  const handleLogout = async() => {
+    const res = await axios.post("/api/auth/logout")
+    const data = await res.data
+    console.log(data)
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +32,7 @@ export default function Login() {
   return (
     <section className=" flex flex-col items-center px-10 py-5 gap-8 min-h-dvh">
       <h1 className=" custom-h1">Login Page</h1>
-      <div>
+      <div className=" flex flex-col gap-4 p-4">
         <form onSubmit={handleSubmit} className=" w-[300px] h-[300px] bg-slate-950 rounded-xl border-2 border-slate-800 flex flex-col justify-center items-center p-5 gap-4">
           <input
             onChange={handleChange}
@@ -42,6 +48,7 @@ export default function Login() {
           />
           <button className=" w-[200px] py-2 px-3 bg-cyan-500 hover:bg-cyan-700 transition-colors delay-75 text-center rounded-xl">Login</button>
         </form>
+        <button onClick={handleLogout} className=" text-center text-xl px-2 py-1 bg-red-600 hover:bg-red-900 transition-colors delay-75 rounded-xl">Logout</button>
       </div>
     </section>
   );
