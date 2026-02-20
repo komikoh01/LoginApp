@@ -64,13 +64,21 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const response = NextResponse.json({
       message: "Login successfully",
-      accessToken,
-      // Esto de devolver el usuario es opcional
       user: {
         id: user.id,
         name: user.name,
         email: user.email,
       }
+    })
+
+    response.cookies.set({
+      name: "accessToken",
+      value: accessToken,
+      httpOnly: true,
+      sameSite: "strict",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+      maxAge: 60 * 15
     })
 
     response.cookies.set({

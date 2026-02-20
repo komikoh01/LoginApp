@@ -1,5 +1,6 @@
 "use client"
 import axios from "axios"
+import { useRouter } from "next/navigation"
 import { ChangeEvent, SubmitEvent } from "react" 
 import { useState } from "react"
 
@@ -8,12 +9,18 @@ export default function Login() {
     email: "",
     password: ""
   })
+  const router = useRouter()
 
   const handleSubmit = async(e: SubmitEvent) => {
     e.preventDefault()
     const res = await axios.post("/api/auth/login", credentials)
     const data = await res.data
+    
+    if(res.status !== 200) {
+      throw new Error("Error en la solicitud")
+    }
     console.log(data)
+    router.push("/")
   }
 
   const handleLogout = async() => {

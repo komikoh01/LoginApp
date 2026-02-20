@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
 
   const response = NextResponse.json("Success");
 
+  response.cookies.set("accessToken", "", {maxAge: 0})
   response.cookies.set("refreshToken", "", { maxAge: 0 });
 
   return response;
