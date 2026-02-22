@@ -1,11 +1,12 @@
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import Link from "next/link";
 
 export default async function Home() {
   const token = (await cookies()).get("accessToken")
+  const pathname = (await headers()).get("next-url")
 
-  if(!token) redirect("/login")
+  if(!token) redirect("/api/auth/refresh?redirect=/")
 
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-slate-950 font-sans gap-4">

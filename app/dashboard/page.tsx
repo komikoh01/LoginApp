@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getNotifications } from "../actions/notifications";
+import { getNotifications } from "../../actions/notifications";
 
 function Dashboard() {
   const {
